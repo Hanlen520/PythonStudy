@@ -61,17 +61,24 @@ class ReverseWords(object):
         # 整个字符串翻转
         array = self.reverse(s).split(" ")
         # 把多余的空格去掉
-        while "" in array:
-            array.remove("")
-        # print(array)
+        # while "" in array:
+        #     array.remove("")
+        print(array)
         point = 0
+        array_new = []
 
         # 每个单词翻转
         for item in array:
-            array[point] = self.reverse(item)
-            point += 1
+            if item == "":
+                # array发生改变，遍历算法有问题
+                # array.remove("")
+                continue
+            array_new.append(self.reverse(item))
+            # array_new[point] = self.reverse(item)
+            # point += 1
         # print(array)
-        return " ".join(array)
+        # return " ".join(array)
+        return " ".join(array_new)
 
 
 if __name__ == '__main__':
