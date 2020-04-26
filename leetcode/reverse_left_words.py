@@ -5,11 +5,7 @@
 @File    : reverse_left_words.py
 @Time    : 2020-04-23  14:36:02
 @Author  : indeyo_lin
-"""
-
-
-def reverse_left_words(s: str, n):
-    """
+@content ：面试题58 - II. 左旋转字符串
     字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。请定义一个函数实现字符串左旋转操作的功能。
     比如，输入字符串"abcdefg"和数字2，该函数将返回左旋转两位得到的结果"cdefgab"。
 
@@ -27,9 +23,15 @@ def reverse_left_words(s: str, n):
     来源：力扣（LeetCode）
     链接：https://leetcode-cn.com/problems/zuo-xuan-zhuan-zi-fu-chuan-lcof
     著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-    :param s:
-    :param n:
-    :return:
+"""
+
+
+def reverse_left_words(s: str, n):
+    """
+    第一种解法
+    :param s: 目标字符串
+    :param n: 分隔的指针
+    :return:  翻转后的字符串
     """
     # done:入参类型和长度校验
     try:
@@ -56,6 +58,34 @@ def reverse_left_words(s: str, n):
         raise e
 
 
+class Solution(object):
+    def reverse(self, l: list, begin, end) -> list:
+        while begin < end:
+            temp = l[begin]
+            l[begin] = l[end]
+            l[end] = temp
+            begin += 1
+            end -= 1
+        return l
+
+    def reverseLeftWords(self, s, n):
+        """
+        :type s: str
+        :type n: int
+        :rtype: str
+        """
+        l = list(s)
+        length = len(l)-1
+        # 翻转整个字符串
+        self.reverse(l, 0, length)
+        # 翻转左边字符串
+        self.reverse(l, 0, length-n)
+        # 翻转移动过的字符串
+        self.reverse(l, length-n+1, length)
+        return "".join(l)
+
+
+
 if __name__ == '__main__':
     print(reverse_left_words('abcdefg', 2))
     print(reverse_left_words('lrloseumgh', 6))
@@ -70,3 +100,7 @@ if __name__ == '__main__':
     #
     # s = "1234"
     # print(''.join(list(s)))
+
+    s=Solution()
+    print(s.reverse([6, 4, 3], 0, 2))
+    print(s.reverseLeftWords("abcdefg", 2))

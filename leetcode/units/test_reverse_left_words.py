@@ -8,10 +8,12 @@
 """
 import pytest
 
-from leetcode.reverse_left_words import reverse_left_words
+from leetcode.reverse_left_words import reverse_left_words, Solution
 
 
 class TestReverseLeftWords:
+    def setup(self):
+        self.s = Solution()
 
     @pytest.mark.parametrize("s, n", {
         ("abcdefg", 2),
@@ -27,3 +29,18 @@ class TestReverseLeftWords:
     ])
     def test_type(self, s, n):
         print(reverse_left_words(s, n))
+
+    @pytest.mark.parametrize("s, n", {
+        ("abcdefg", 2),
+        ("rloseumghl", 6)
+    })
+    def test_success(self, s, n):
+        print(self.s.reverseLeftWords(s, n))
+
+    @pytest.mark.parametrize("s, n", [
+        (1234, 2),
+        ("12sdfsf", "123"),
+        ("JJDJFJ", 0)
+    ])
+    def test_type(self, s, n):
+        print(self.s.reverseLeftWords(s, n))
