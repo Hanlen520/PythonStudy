@@ -55,11 +55,24 @@ class ReplaceSpace:
         return "".join(array_new)
 
 
+class SimpleReplaceSpace:
+    def replaceSpace(self, s):
+        origin = list(s)
+        new = []
+        for i in origin:
+            if i == " ":
+                new.append("%20")
+            else:
+                new.append(i)
+        return "".join(new)
+
+
 if __name__ == '__main__':
-    a = [1, 2, 3, 4, 5, 6, 7, 8]
-    b = ['l', 'o', 'v', 'e']
-    a[10:11] = b[1:2]
-    print(a)
+    # a = [1, 2, 3, 4, 5, 6, 7, 8]
+    # b = ['l', 'o', 'v', 'e']
+    # 实际上赋值给a[8]
+    # a[10:11] = b[1:2]
+    # print(a)
     # print(a[:-5:2])
     # a[1:3] = [9, 9]
     # print(a)
@@ -72,6 +85,8 @@ if __name__ == '__main__':
 
     s = ReplaceSpace()
     print(s.replaceSpace(" aeee e"))
+    s1 = SimpleReplaceSpace()
+    print(s1.replaceSpace(" aeee e"))
 
     # a = []
     # q = queue.Queue()
