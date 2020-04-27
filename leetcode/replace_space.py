@@ -76,6 +76,7 @@ class LessSpaceReplaceSpace:
         while p < length:
             if array[p] == " ":
                 blank_num += 1
+                # python不支持给空的list用切片赋值，先用占位符占个坑
                 array.append('x')
                 array.append('x')
             p += 1
@@ -85,15 +86,14 @@ class LessSpaceReplaceSpace:
 
         while p_orgin_tail >= 0:
             if array[p_orgin_tail] == " ":
-                # python不支持给空的list用切片赋值
                 array[p_new_tail-2:p_new_tail+1] = ["%", "2", "0"]
-                # array.insert(p_new_tail-2, "%20")
                 p_new_tail -= 3
             else:
                 array[p_new_tail] = array[p_orgin_tail]
                 p_new_tail -= 1
             p_orgin_tail -= 1
         return "".join(array)
+
 
 if __name__ == '__main__':
     # a = [1, 2, 3, 4, 5, 6, 7, 8]
