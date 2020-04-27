@@ -8,13 +8,14 @@
 """
 import pytest
 
-from leetcode.replace_space import ReplaceSpace, SimpleReplaceSpace
+from leetcode.replace_space import ReplaceSpace, SimpleReplaceSpace, LessSpaceReplaceSpace
 
 
 class TestReplaceSpace:
     def setup(self):
         self.s = ReplaceSpace()
         self.s1 = SimpleReplaceSpace()
+        self.s2 = LessSpaceReplaceSpace()
 
     @pytest.mark.parametrize("s", [
         "hello world",
@@ -27,6 +28,7 @@ class TestReplaceSpace:
     def test_success(self, s):
         print(self.s.replaceSpace(s))
         print(self.s1.replaceSpace(s))
+        print(self.s2.replaceSpace(s))
 
     @pytest.mark.parametrize("s", [
         " ",
@@ -37,3 +39,4 @@ class TestReplaceSpace:
     def test_fail(self, s):
         print(self.s.replaceSpace(s))
         print(self.s1.replaceSpace(s))
+        print(self.s2.replaceSpace(s))
