@@ -30,12 +30,21 @@ class ReplaceSpace:
         # python里面数组的赋值操作，实际上相当于引用，而没有开辟一个新的存储空间
         # 如果不copy，直接赋值，那么对array_new进行修改会影响到array
         array_new = array.copy()
-        p_head, p_tail = 0, len(array) - 1
+        # 代表当前空格后面的字符串收尾指针
+        p_head, p_tail = 0, len(array)-1
+        # 原字符串扫描指针
         p_search = 0
 
         for i in array:
             if i == ' ':
-                array_new[p_head+3:p_tail+3] = array[p_search+1:len(array)+1]
+                # 这种切片赋值法有一种情况不能实现，不能默认输入空字符，赋值后list后面都是有值的
+                # 当结尾是一个空格加一个字符的时候，最后一个字符会丢失
+                last = array[p_search+1:len(array)]
+                if len(last) < 2:
+                    array_new.append("")
+                    array_new[p_head+3:p_tail+3] = last
+                else:
+                    array_new[p_head+3:p_tail+3] = array[p_search+1:len(array)]
                 array_new[p_head:p_head+3] = "%20"
                 p_head += 3
                 p_tail += 3
@@ -49,7 +58,8 @@ class ReplaceSpace:
 if __name__ == '__main__':
     a = [1, 2, 3, 4, 5, 6, 7, 8]
     b = ['l', 'o', 'v', 'e']
-    #
+    a[10:11] = b[1:2]
+    print(a)
     # print(a[:-5:2])
     # a[1:3] = [9, 9]
     # print(a)
@@ -61,7 +71,7 @@ if __name__ == '__main__':
     # print(a.index(3))
 
     s = ReplaceSpace()
-    print(s.replaceSpace("hello world arthinking"))
+    print(s.replaceSpace(" aeee e"))
 
     # a = []
     # q = queue.Queue()

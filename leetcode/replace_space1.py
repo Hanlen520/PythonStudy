@@ -30,5 +30,5 @@ class ReplaceSpace:
 
 if __name__ == '__main__':
     s = ReplaceSpace()
-    print(s.replaceSpace("hello world arthinking"))
+    print(s.replaceSpace(" aeee e"))
 

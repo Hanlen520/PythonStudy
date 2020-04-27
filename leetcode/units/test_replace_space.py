@@ -18,7 +18,10 @@ class TestReplaceSpace:
     @pytest.mark.parametrize("s", [
         "hello world",
         "We are happy.",
-        "love&peace"
+        "love&peace",
+        " aeee e",
+        " lalal gogo ye ",
+        "a ye a b"
     ])
     def test_success(self, s):
         print(self.s.replaceSpace(s))
