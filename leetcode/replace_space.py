@@ -73,6 +73,7 @@ class LessSpaceReplaceSpace:
         length = len(array)
         p, blank_num = 0, 0
 
+        # 因为会改变数组本身，不能用for遍历
         while p < length:
             if array[p] == " ":
                 blank_num += 1
