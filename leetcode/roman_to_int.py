@@ -57,21 +57,8 @@ class RomanToInt:
             如果不是组合，加上当前值
             平均实行时间：70+ms
         """
-        roman = {
-            "I": 1,
-            "V": 5,
-            "X": 10,
-            "L": 50,
-            "C": 100,
-            "D": 500,
-            "M": 1000,
-            "IV": 4,
-            "IX": 9,
-            "XL": 40,
-            "XC": 90,
-            "CD": 400,
-            "CM": 900
-        }
+        roman = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000,
+                 "IV": 4, "IX": 9, "XL": 40, "XC": 90, "CD": 400, "CM": 900}
         l_str = list(s)
         p, roman_int = 0, 0
 
@@ -94,15 +81,7 @@ class RomanToInt:
             这个算法稍微比解法一快一点，平均执行时间：60+ms
             缺点是代码可读性不强
         """
-        roman = {
-            "I": 1,
-            "V": 5,
-            "X": 10,
-            "L": 50,
-            "C": 100,
-            "D": 500,
-            "M": 1000
-        }
+        roman = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
         l_str = list(s)
         p, roman_int = 0, 0
 
@@ -114,7 +93,7 @@ class RomanToInt:
             p += 1
         return roman_int
 
-    def roman_to_int3(self, s:str):
+    def roman_to_int3(self, s: str):
         """
         解法三：
             字典存储的是单字符，从字符串第二位开始扫描，只对前一个字符进行加减法。
@@ -124,19 +103,11 @@ class RomanToInt:
         :param s:
         :return:
         """
-        roman = {
-            "I": 1,
-            "V": 5,
-            "X": 10,
-            "L": 50,
-            "C": 100,
-            "D": 500,
-            "M": 1000
-        }
+        roman = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
         l_str = list(s)
         # 从第二位开始遍历
         p, roman_int = 1, 0
-        # 对pre_val做处理，可以节省掉很多raman[]的写法，代码更优雅
+        # 记录pre_val，可以节省掉很多raman[]的写法，代码更优雅
         pre_val = roman[l_str[0]]
 
         while p < len(s):
@@ -152,11 +123,30 @@ class RomanToInt:
         roman_int += pre_val
         return roman_int
 
+    def roman_to_int4(self, s :str):
+        """
+        解法四：
+            对比解法三，少些3行代码，在Python里面指针的移动可以用range生成有序序列
+            而且，和后面一位对比，少了第一位减1越界问题
+        """
+        roman = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+        roman_int = 0
+
+        for index in range(len(s)-1):
+            if roman[s[index]] >= roman[s[index+1]]:
+                roman_int += roman[s[index]]
+            else:
+                roman_int -= roman[s[index]]
+        roman_int += roman[s[-1]]
+        return roman_int
+
 
 if __name__ == '__main__':
     s = "12345"
     print(s.find('2'))
     print(s.index('3'))
+    # 字符串也可以通过下标访问
+    print(s[2])
 
     s = RomanToInt()
-    print(s.roman_to_int3("CXLII"))
+    print(s.roman_to_int4("CXLII"))

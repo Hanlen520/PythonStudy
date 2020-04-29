@@ -30,3 +30,4 @@ class TestRomanToInt:
         assert self.s.romanToInt(s) == int_num
         assert self.s.roman_to_int2(s) == int_num
         assert self.s.roman_to_int3(s) == int_num
+        assert self.s.roman_to_int4(s) == int_num
