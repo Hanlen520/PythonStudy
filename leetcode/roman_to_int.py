@@ -50,6 +50,12 @@ class RomanToInt:
     """
 
     def romanToInt(self, s: str) -> int:
+        """
+        解法一：
+            罗马数字所有组合用字典保存，从字符串第一位扫描
+            如果是组合就取组合值并减去前一位的值，
+            如果不是组合加上当前值
+        """
         roman = {
             "I": 1,
             "V": 5,
@@ -71,11 +77,76 @@ class RomanToInt:
         while p < len(l_str):
             if p == 0:
                 roman_int = roman[l_str[p]]
-            elif "".join(l_str[p-1:p+1]) in roman:
+            elif "".join(l_str[p - 1:p + 1]) in roman:
                 # 如果可以和前一位组成一对，则减去前一位的值
-                roman_int += roman["".join(l_str[p-1:p+1])] - roman[l_str[p-1]]
+                roman_int += roman["".join(l_str[p - 1:p + 1])] - roman[l_str[p - 1]]
             else:
                 roman_int += roman[l_str[p]]
             p += 1
         return roman_int
 
+    def roman_to_int2(self, s):
+        """
+        解法二：
+            和解法一不同的是，字典不一样，不包含双字符罗马数字
+        """
+        roman = {
+            "I": 1,
+            "V": 5,
+            "X": 10,
+            "L": 50,
+            "C": 100,
+            "D": 500,
+            "M": 1000
+        }
+        l_str = list(s)
+        p, roman_int = 0, 0
+
+        while p < len(s):
+            if p == 0 or roman[l_str[p]] <= roman[l_str[p - 1]]:
+                roman_int += roman[l_str[p]]
+            else:
+                roman_int = roman_int + roman[l_str[p]] - roman[l_str[p - 1]] * 2
+            p += 1
+        return roman_int
+
+    def roman_to_int3(self, s:str):
+        """
+        解法三：
+            字典存储的是单字符，从字符串第二位开始扫描，只对前一个字符进行加减法。
+            如果前一位小于当前值，则对前一位做减法
+            如果前一位大于等于当前值，则对前一位做加法
+        :param s:
+        :return:
+        """
+        roman = {
+            "I": 1,
+            "V": 5,
+            "X": 10,
+            "L": 50,
+            "C": 100,
+            "D": 500,
+            "M": 1000
+        }
+        l_str = list(s)
+        p, roman_int = 1, 0
+        pre_val = roman[l_str[0]]
+
+        while p < len(s):
+            if roman[l_str[p]] <= pre_val:
+                roman_int += pre_val
+            else:
+                roman_int -= pre_val
+            pre_val = roman[l_str[p]]
+            p += 1
+        roman_int += pre_val
+        return roman_int
+
+
+if __name__ == '__main__':
+    s = "12345"
+    print(s.find('2'))
+    print(s.index('3'))
+
+    s = RomanToInt()
+    print(s.roman_to_int3("CXLII"))

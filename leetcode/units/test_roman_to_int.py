@@ -21,9 +21,11 @@ class TestRomanToInt:
         ("VI", 6),
         ("IV", 4),
         ("III", 3),
-        ("IIXLC", 140),
+        ("CXLII", 142),
         ("MCMXCIV", 1994),
         ("LVIII", 58)
     ])
     def test_success(self, s, int_num):
         assert self.s.romanToInt(s) == int_num
+        assert self.s.roman_to_int2(s) == int_num
+        assert self.s.roman_to_int3(s) == int_num
