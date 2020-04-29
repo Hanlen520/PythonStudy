@@ -15,6 +15,7 @@ class TestRomanToInt:
     def setup(self):
         self.s = RomanToInt()
 
+    # 注意要是合法的罗马数字才行，要不然算出来一定会报错！
     @pytest.mark.parametrize("s, int_num", [
         ("I", 1),
         ("V", 5),

@@ -53,8 +53,9 @@ class RomanToInt:
         """
         解法一：
             罗马数字所有组合用字典保存，从字符串第一位扫描
-            如果是组合就取组合值并减去前一位的值，
-            如果不是组合加上当前值
+            如果是组合，就取组合值并减去前一位的值，
+            如果不是组合，加上当前值
+            平均实行时间：70+ms
         """
         roman = {
             "I": 1,
@@ -88,7 +89,10 @@ class RomanToInt:
     def roman_to_int2(self, s):
         """
         解法二：
-            和解法一不同的是，字典不一样，不包含双字符罗马数字
+            和解法一不同的是，字典不一样，不包含双字符罗马数字。
+            和前一位比较大小，判断当前位用加法还是减法
+            这个算法稍微比解法一快一点，平均执行时间：60+ms
+            缺点是代码可读性不强
         """
         roman = {
             "I": 1,
@@ -116,6 +120,7 @@ class RomanToInt:
             字典存储的是单字符，从字符串第二位开始扫描，只对前一个字符进行加减法。
             如果前一位小于当前值，则对前一位做减法
             如果前一位大于等于当前值，则对前一位做加法
+            该算法比前面两种都快一点，平均执行时间50+ms
         :param s:
         :return:
         """
@@ -129,16 +134,21 @@ class RomanToInt:
             "M": 1000
         }
         l_str = list(s)
+        # 从第二位开始遍历
         p, roman_int = 1, 0
+        # 对pre_val做处理，可以节省掉很多raman[]的写法，代码更优雅
         pre_val = roman[l_str[0]]
 
         while p < len(s):
+            # 当前值小于等于前一位，加法
             if roman[l_str[p]] <= pre_val:
                 roman_int += pre_val
             else:
+                # 当前值大于前一位，减法
                 roman_int -= pre_val
             pre_val = roman[l_str[p]]
             p += 1
+        # 注意最后一位要加上，别忘了
         roman_int += pre_val
         return roman_int
 
