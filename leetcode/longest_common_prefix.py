@@ -35,15 +35,13 @@ class LongestCommonPrefix:
             return ""
         # 获取最短字符串的长度，防止越界问题
         min_str_len = min([len(x) for x in strs])
-        common_prefix = []
 
         for ch_index in range(min_str_len):
             char = strs[0][ch_index]
             for string in strs:
                 if char != string[ch_index]:
-                    return "".join(common_prefix) if common_prefix else ""
-            common_prefix.append(char)
-        return "".join(common_prefix)
+                    return strs[0][:ch_index]
+        return strs[0][:min_str_len]
 
 
 if __name__ == '__main__':
@@ -52,4 +50,5 @@ if __name__ == '__main__':
     # print(max(l))
 
     prefix = LongestCommonPrefix()
-    print(prefix.longestCommonPrefix(["flower", "flow", "flight"]))
+    print(prefix.longestCommonPrefix(["aa", "aa"]))
+    print(prefix.longestCommonPrefix(["flower", "flow", "flowing"]))

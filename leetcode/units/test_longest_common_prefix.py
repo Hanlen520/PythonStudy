@@ -19,16 +19,17 @@ class TestLongestCommonPrefix:
         (["flower", "flow", "flight"], "fl"),
         (["flower", "flow", "flowing"], "flow"),
         (["apple", "aunt", "aproach", "app"], "a"),
-        (["zoo", "zookeeper"], "zoo")
+        (["zoo", "zookeeper"], "zoo"),
+        # 题目中没有说明1个字符串的情况
+        (["gogogo"], "gogogo"),
+        (["aa", "aa"], "aa")
     ])
     def test_success(self, strs, prefix):
         assert self.pre.longestCommonPrefix(strs) == prefix
 
     @pytest.mark.parametrize("strs", [
-        # 题目中没有说明1个字符串的情况
-        ["gogogo"],
         ["dog", "racecar", "car"],
-        []
+        ["yes", "yellow", "white"]
     ])
     def test_fail(self, strs):
         assert self.pre.longestCommonPrefix(strs) == ""
