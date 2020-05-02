@@ -32,8 +32,10 @@ class StrStr:
 
     def strStr(self, haystack: str, needle: str) -> int:
         # 移动窗口法
-        for start in range(len(haystack)-len(needle)+1):
-            if haystack[start:start+len(needle)] == needle:
+        # 平均执行时间：40+ms
+        # 这个办法最佳！时间最短且代码最短
+        for start in range(len(haystack) - len(needle) + 1):
+            if haystack[start:start + len(needle)] == needle:
                 return start
         return -1
 
@@ -71,3 +73,38 @@ class StrStr:
         #         flag_found = False
         #     index += 1
         # return index - len(needle)
+
+    def strStr_2(self, haystack: str, needle: str) -> int:
+        # 双指针法（回溯法）
+        # 平均执行时间：50+ms
+        # 多了回溯的思想，解决我之前方案的难题，但效率没有滑动窗口的高。
+        # 就当做打开一种新思路吧
+        p_hay, p_nee = 0, 0
+        len_hay = len(haystack)
+        len_nee = len(needle)
+        # 是否出现相同字符
+        flag = False
+
+        while p_hay < len_hay:
+            # 如果needle已经遍历完，直接返回，防止溢出
+            if p_nee == len_nee:
+                return p_hay-len_nee
+            if not flag and haystack[p_hay] != needle[p_nee]:
+                p_hay += 1
+                continue
+            if haystack[p_hay] == needle[p_nee]:
+                p_hay += 1
+                p_nee += 1
+                flag = True
+            else:
+                # 回溯
+                p_hay = p_hay - p_nee + 1
+                # 遇到不相同字符，重置 p_nee 和 flag
+                p_nee = 0
+                flag = False
+        return (p_hay-len_nee) if p_nee == len_nee else -1
+
+
+if __name__ == '__main__':
+    a = 0
+    b = 0

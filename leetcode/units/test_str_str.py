@@ -26,6 +26,7 @@ class TestStrStr:
     ])
     def test_success(self, haystack, needle, index):
         assert self.s.strStr(haystack, needle) == index
+        assert self.s.strStr_2(haystack, needle) == index
 
     @pytest.mark.parametrize("haystack, needle", [
         ("aaaaa", "bba"),
@@ -36,3 +37,4 @@ class TestStrStr:
     ])
     def test_fail(self, haystack, needle):
         assert self.s.strStr(haystack, needle) == -1
+        assert self.s.strStr_2(haystack, needle) == -1
