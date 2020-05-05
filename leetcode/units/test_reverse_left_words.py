@@ -30,12 +30,13 @@ class TestReverseLeftWords:
     def test_type(self, s, n):
         print(reverse_left_words(s, n))
 
-    @pytest.mark.parametrize("s, n", {
-        ("abcdefg", 2),
-        ("rloseumghl", 6)
+    @pytest.mark.parametrize("s, n, result", {
+        ("abcdefg", 2, "cdefgab"),
+        ("rloseumghl", 6, "mghlrloseu")
     })
-    def test_success(self, s, n):
-        print(self.s.reverseLeftWords(s, n))
+    def test_success(self, s, n, result):
+        assert self.s.reverseLeftWords(s, n) == result
+        assert self.s.reverseLeftWords3(s, n) == result
 
     @pytest.mark.parametrize("s, n", [
         (1234, 2),

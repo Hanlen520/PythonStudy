@@ -84,6 +84,11 @@ class Solution(object):
         self.reverse(l, length-n+1, length)
         return "".join(l)
 
+    def reverseLeftWords3(self, s, n):
+        """切片函数"""
+        arr = list(s)
+        arr = arr[n:] + arr[:n]
+        return "".join(arr)
 
 
 if __name__ == '__main__':
