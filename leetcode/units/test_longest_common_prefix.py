@@ -8,13 +8,14 @@
 """
 import pytest
 
-from leetcode.longest_common_prefix import LongestCommonPrefix, Solution
+from leetcode.longest_common_prefix import LongestCommonPrefix, Solution, LongestCommonPrefix1
 
 
 class TestLongestCommonPrefix:
     def setup(self):
         self.pre = LongestCommonPrefix()
         self.pre1 = Solution()
+        self.pre2 = LongestCommonPrefix1()
 
     @pytest.mark.parametrize("strs, prefix", [
         (["flower", "flow", "flight"], "fl"),
@@ -29,6 +30,7 @@ class TestLongestCommonPrefix:
     def test_success(self, strs, prefix):
         # assert self.pre.longestCommonPrefix(strs) == prefix
         assert self.pre1.longestCommonPrefix(strs) == prefix
+        assert self.pre2.longestCommonPrefix(strs) == prefix
 
     @pytest.mark.parametrize("strs", [
         ["dog", "racecar", "car"],

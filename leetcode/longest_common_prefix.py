@@ -50,14 +50,36 @@ class Solution:
         if len(strs) == 0:
             return ""
         shortest = min(strs, key=len)
-        # shortest = strs[0]
         for other in strs:
-        # for other in strs[1:]:
             while other.find(shortest) != 0:
                 shortest = shortest[:-1]
                 if shortest == "":
                     return ""
         return shortest
+
+
+class LongestCommonPrefix1:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        if not strs:
+            return ""
+
+        self.shortest = min(strs, key=len)
+        left, right = 0, len(self.shortest) - 1
+
+        while left <= right:
+            mid = int((left + right) / 2)
+            if self.is_common_prefix(strs, mid):
+                left += 1
+            else:
+                right -= 1
+        return self.shortest[left:right + 1]
+
+    def is_common_prefix(self, strs, mid):
+        for word in strs:
+            if word.find(self.shortest[:mid + 1]) != 0:
+                return False
+        return True
+
 
 if __name__ == '__main__':
     # l = [x*x for x in range(5)]
