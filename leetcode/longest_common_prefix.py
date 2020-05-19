@@ -72,7 +72,11 @@ class LongestCommonPrefix1:
                 left += 1
             else:
                 right -= 1
-        return self.shortest[left:right + 1]
+
+        # 无公共前缀，返回空
+        if right == -1:
+            return ""
+        return self.shortest[:int((left + right) / 2) + 1]
 
     def is_common_prefix(self, strs, mid):
         for word in strs:
