@@ -30,6 +30,7 @@ class LongestCommonPrefix:
     链接：https://leetcode-cn.com/problems/longest-common-prefix
     著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
     """
+
     def longestCommonPrefix(self, strs: List[str]) -> str:
         if not strs:
             return ""
@@ -43,6 +44,20 @@ class LongestCommonPrefix:
                     return strs[0][:ch_index]
         return strs[0][:min_str_len]
 
+
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        if len(strs) == 0:
+            return ""
+        shortest = min(strs, key=len)
+        # shortest = strs[0]
+        for other in strs:
+        # for other in strs[1:]:
+            while other.find(shortest) != 0:
+                shortest = shortest[:-1]
+                if shortest == "":
+                    return ""
+        return shortest
 
 if __name__ == '__main__':
     # l = [x*x for x in range(5)]
